@@ -1,5 +1,5 @@
 import os
-os.system('clear')
+# os.system('clear')
 
 
 class Hangman:
@@ -11,15 +11,38 @@ class Hangman:
         self.len_word = len(self.word)
         for i in range(self.len_word):
             self.word_dict[i] = ['_', self.word[i]]
+        '''
+        self.word_dict (result example)
+        0 ['_', 'p']
+        1 ['_', 'r']
+        2 ['_', 'o']
+        3 ['_', 'v']
+        4 ['_', 'a']
+        '''
  
-    def get_hidden_word(self, letter):
-        '''at the moment not used'''
+
+
+    def get_hidden_word(self):
         '''show the hidden word like this: ______'''
+        letter = 'r'
         hidden_word = ''
+############# arrived here ###################
+        for i, j in self.word_dict.items():
+            if j[1] == letter:
+                self.word_dict[i][0] = letter
+############# arrived here ###################
+        print(self.word_dict)
+        quit()
+
         # show the hidden word
         for i in self.word_dict:
-            hidden_word += self.word_dict[0][0]
-        return hidden_word
+            hidden_word += self.word_dict[i][0]
+
+        print(hidden_word)
+
+
+
+
 
     def core_game(self):
         '''user interaction'''
@@ -28,7 +51,7 @@ class Hangman:
         # core game
         while self.step_num < 7:
             self.guess = input('what letter? > ')
-            os.system('clear')
+            # os.system('clear')
             if not self.guess in self.word:
                 self.step_num += 1
             else:
@@ -111,14 +134,7 @@ class Hangman:
         return self.hangman_steps
 
 
-'''
-self.word_dict (result example)
-0 ['_', 'p']
-1 ['_', 'r']
-2 ['_', 'o']
-3 ['_', 'v']
-4 ['_', 'a']
-'''
+
 
 play = Hangman()
-print(play.core_game())
+play.get_hidden_word()
