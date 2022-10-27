@@ -1,5 +1,5 @@
 import os
-# os.system('clear')
+os.system('clear')
 
 
 class Hangman:
@@ -28,7 +28,7 @@ class Hangman:
         # core game
         while self.step_num < 7:
             self.guess = input('what letter? > ')
-            # os.system('clear')
+            os.system('clear')
             if not self.guess in self.word:
                 self.step_num += 1
             else:
@@ -37,8 +37,16 @@ class Hangman:
                     break
             
             print(self.death()[self.step_num])
+
+            #### just for debugging
             print(self.step_num)
             print(self.check)
+            #######################
+        
+        if self.check == self.len_word:
+            print('You WIN!')
+        else:
+            print('You LOST')
         quit()
 
     def death(self):
