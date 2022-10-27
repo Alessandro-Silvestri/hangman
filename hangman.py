@@ -7,28 +7,38 @@ class Hangman:
         # create secret word dictionary 
         self.word_dict = {}
         self.step_num = 0
-        self.word = 'prova' 
-        for i in range(len(self.word)):
+        self.word = 'prova'
+        self.len_word = len(self.word)
+        for i in range(self.len_word):
             self.word_dict[i] = ['_', self.word[i]]
  
-    def get_hidden_word(self):
-        '''show the hiddemn word like this: ______'''
+    def get_hidden_word(self, letter):
+        '''at the moment not used'''
+        '''show the hidden word like this: ______'''
+        hidden_word = ''
         # show the hidden word
         for i in self.word_dict:
-            print(self.word_dict[0][0], end='')
+            hidden_word += self.word_dict[0][0]
+        return hidden_word
 
     def core_game(self):
         '''user interaction'''
+        self.check = 0
         print(self.death()[self.step_num])
-
         # core game
         while self.step_num < 7:
             self.guess = input('what letter? > ')
             # os.system('clear')
             if not self.guess in self.word:
                 self.step_num += 1
+            else:
+                self.check += 1
+                if self.check == self.len_word:
+                    break
+            
             print(self.death()[self.step_num])
             print(self.step_num)
+            print(self.check)
         quit()
 
     def death(self):
