@@ -29,23 +29,23 @@ class Hangman:
         
         print(self.death()[self.step_num])                  # shows the Hangman
         self.hidden_word = self.get_hidden_word('.')
-        print(self.hidden_word)                             # prints hidden word
+        print('            ', self.hidden_word)                             # prints hidden word
         
         # core game
         while self.step_num < 7:                             # 7 are the Hangman steps
-            self.guess = input('what letter? > ').upper()
+            self.guess = input('\nwhat letter? > ').upper()
             if not self.guess in self.word:
                 os.system('clear')
                 self.step_num += 1
                 print(self.death()[self.step_num])           # shows the Hangman
                 self.hidden_word = self.get_hidden_word(self.guess)
-                print(self.hidden_word)                      # prints hidden word
+                print('            ', self.hidden_word)                      # prints hidden word
         
             else:
                 os.system('clear')
                 print(self.death()[self.step_num])           # shows the Hangman
                 self.hidden_word = self.get_hidden_word(self.guess)
-                print(self.hidden_word)                      # prints hidden word   
+                print('            ', self.hidden_word)                      # prints hidden word   
                 if not '_' in self.hidden_word:
                     break
 
