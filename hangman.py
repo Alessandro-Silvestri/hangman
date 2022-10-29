@@ -19,28 +19,18 @@ class Hangman:
         3 ['_', 'v']
         4 ['_', 'a']
         '''
- 
-
 
     def get_hidden_word(self, letter: str):
         '''show the hidden word like this: ______'''
         hidden_word = ''
-
-        # it modifies word_dict, reveals the letter guessed
+        # it generates the hidden_word adding the input letters
         for i, j in self.word_dict.items():
             if j[1] == letter:
                 self.word_dict[i][0] = letter
-
-        # put all the characters: '_' and <letter> inside hidden_word
-        for i, j in self.word_dict.items():
-            hidden_word += j[0]
-
+                hidden_word += j[0]
+            else:
+                hidden_word += j[0]
         return hidden_word
-
-
-
-
-
 
     def core_game(self):
         '''user interaction'''
@@ -69,8 +59,6 @@ class Hangman:
         else:
             print('You LOST')
         quit()
-
-
 
     def death(self):
         '''steps to death'''
