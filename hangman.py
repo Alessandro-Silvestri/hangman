@@ -22,23 +22,21 @@ class Hangman:
  
 
 
-    def get_hidden_word(self):
+    def get_hidden_word(self, letter: str):
         '''show the hidden word like this: ______'''
-        letter = 'r'
         hidden_word = ''
-############# arrived here ###################
+
+        # it modifies word_dict, reveals the letter guessed
         for i, j in self.word_dict.items():
             if j[1] == letter:
                 self.word_dict[i][0] = letter
-############# arrived here ###################
-        print(self.word_dict)
-        quit()
 
-        # show the hidden word
-        for i in self.word_dict:
-            hidden_word += self.word_dict[i][0]
+        # put all the characters: '_' and <letter> inside hidden_word
+        for i, j in self.word_dict.items():
+            hidden_word += j[0]
 
-        print(hidden_word)
+        return hidden_word
+
 
 
 
@@ -71,6 +69,8 @@ class Hangman:
         else:
             print('You LOST')
         quit()
+
+
 
     def death(self):
         '''steps to death'''
@@ -137,4 +137,14 @@ class Hangman:
 
 
 play = Hangman()
-play.get_hidden_word()
+
+while True:
+    letter = input('what letter? > ')
+    print(play.get_hidden_word(letter))
+
+
+
+# IT WORKS! shows hidden word:
+# while True:
+#     letter = input('what letter? > ')
+#     print(play.get_hidden_word(letter))
