@@ -1,14 +1,14 @@
 import os
-# os.system('clear')
+os.system('clear')
 
 
 class Hangman:
     def __init__(self):
         # create secret word dictionary 
+        self.word = 'prova'                                 # word you have to guess
+        self.len_word = len(self.word)                      # word characters numbers
         self.word_dict = {}
         self.step_num = 0
-        self.word = 'prova'
-        self.len_word = len(self.word)
         for i in range(self.len_word):
             self.word_dict[i] = ['_', self.word[i]]
         '''
@@ -32,33 +32,41 @@ class Hangman:
                 hidden_word += j[0]
         return hidden_word
 
+
+
     def core_game(self):
-        '''user interaction'''
-        self.check = 0
-        print(self.death()[self.step_num])
+        self.check = 0                              
         # core game
-        while self.step_num < 7:
+        while self.step_num < 7:                            # 7 are the Hangman steps
+
+            print(self.death()[self.step_num])              # shows the Hangman
             self.guess = input('what letter? > ')
-            # os.system('clear')
+
+
+
             if not self.guess in self.word:
                 self.step_num += 1
+                print(self.get_hidden_word(self.guess))     # prints hidden word
             else:
                 self.check += 1
+                print(self.get_hidden_word(self.guess))     # prints hidden word
                 if self.check == self.len_word:
                     break
-            
-            print(self.death()[self.step_num])
+
+
 
             #### just for debugging
             print(self.step_num)
             print(self.check)
-            #######################
+            #### just for debugging
+        
         
         if self.check == self.len_word:
             print('You WIN!')
         else:
+            print(self.death()[self.step_num])              # shows the Hangman
             print('You LOST')
-        quit()
+
 
     def death(self):
         '''steps to death'''
@@ -125,10 +133,7 @@ class Hangman:
 
 
 play = Hangman()
-
-while True:
-    letter = input('what letter? > ')
-    print(play.get_hidden_word(letter))
+play.core_game()
 
 
 
