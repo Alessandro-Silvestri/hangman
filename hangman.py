@@ -1,3 +1,8 @@
+'''
+HANGMAN!
+Made by Alessandro Silvestri © 2022 <alessandro.silvestri.work@gmail.com>
+'''
+
 import os
 os.system('clear')
 
@@ -8,9 +13,8 @@ class Hangman:
         self.step_num = 0
 
     def get_hidden_word(self, letter: str):
-        '''show the hidden word like this: ______'''
+        '''it generates the hidden_word adding the input letters'''
         hidden_word = ''
-        # it generates the hidden_word adding the input letters
         for i, j in self.word_dict.items():
             if j[1] == letter:
                 self.word_dict[i][0] = letter
@@ -20,30 +24,28 @@ class Hangman:
         return hidden_word
 
     def core_game(self):
+        '''interaction with the user'''
         self.word = input('Insert the secret word: > ').upper()
-        os.system('clear')
-
         self.len_word = len(self.word)                      # word characters numbers
+        os.system('clear')
         for i in range(self.len_word):                      # create secret word dictionary 
             self.word_dict[i] = ['_', self.word[i]]
-        
-        print(self.death()[self.step_num])                  # shows the Hangman
+        self.show_hangman()                  
         self.hidden_word = self.get_hidden_word('.')
-        print('            ', self.hidden_word)                             # prints hidden word
+        print('            ', self.hidden_word)              # prints hidden word
         
-        # core game
         while self.step_num < 7:                             # 7 are the Hangman steps
             self.guess = input('\nwhat letter? > ').upper()
             if not self.guess in self.word:
                 os.system('clear')
                 self.step_num += 1
-                print(self.death()[self.step_num])           # shows the Hangman
+                self.show_hangman()           
                 self.hidden_word = self.get_hidden_word(self.guess)
                 print('            ', self.hidden_word)                      # prints hidden word
         
             else:
                 os.system('clear')
-                print(self.death()[self.step_num])           # shows the Hangman
+                self.show_hangman()           
                 self.hidden_word = self.get_hidden_word(self.guess)
                 print('            ', self.hidden_word)                      # prints hidden word   
                 if not '_' in self.hidden_word:
@@ -54,6 +56,10 @@ class Hangman:
         else:
             print('You LOST')
             print('The word was:', self.word)
+
+    def show_hangman(self):
+        '''shows the hangman progress'''
+        print(self.death()[self.step_num])
 
     def death(self):
         '''steps to death'''
